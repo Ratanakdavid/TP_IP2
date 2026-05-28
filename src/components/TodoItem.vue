@@ -1,22 +1,28 @@
 <template>
-  <li class="list pending" @click="toggleStatus(todo.id)">
-    <input type="checkbox" :checked="todo.completedAt != null" />
-    <span class="task">{{ todo.name }}</span>
+  <li class="list" @click="toggle">
+    <input type="checkbox" :checked="todo.is_done" />
+    <span class="task" :style="todo.is_done ? 'text-decoration: line-through' : ''">
+      {{ todo.title }}
+    </span>
     <i class="uil" :class="icon"></i>
+    <button @click.stop="remove" style="margin-left: 10px; color: red;">✕</button>
   </li>
 </template>
+
 <script>
-import { useTodoStore } from "../stores/todo";
+import { useTodoStore } from '../stores/todo'
+
 export default {
-  setup() {
-    const todoStore = useTodoStore();
-    return { todoStore };
+  props: ['todo', 'icon'],
+  setup(props) {
+    const todoStore = useTodoStore()
+    function toggle() {
+      todoStore.toggleTodo(props.todo)
+    }
+    function remove() {
+      todoStore.deleteTodo(props.todo.id)
+    }
+    return { toggle, remove }
   },
-  props: ["todo", "icon"],
-  methods: {
-    toggleStatus(todoId) {
-      this.todoStore.toggleStatus(todoId);
-    },
-  },
-};
+}
 </script>

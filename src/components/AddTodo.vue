@@ -8,13 +8,14 @@
     <i class="uil uil-notes note-icon"></i>
   </div>
 </template>
+
 <script>
 export default {
   methods: {
     addTodo(e) {
-      this.$emit("added", e.target.value);
-      this.$refs.input.value = null;
+      this.$emit('added', e.target.value)
+      this.$refs.input.value = null
     },
   },
-};
+}
 </script>
