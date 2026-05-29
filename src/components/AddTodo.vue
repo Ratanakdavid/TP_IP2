@@ -1,11 +1,12 @@
 <template>
-  <div class="input-field">
-    <textarea
+  <div class="input-wrapper">
+    <i class="uil uil-plus-circle add-icon"></i>
+    <input
       @keyup.enter.prevent="addTodo"
       ref="input"
-      placeholder="Enter your new todo"
-    ></textarea>
-    <i class="uil uil-notes note-icon"></i>
+      placeholder="Add a new task..."
+      class="todo-input"
+    />
   </div>
 </template>
 

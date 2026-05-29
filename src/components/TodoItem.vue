@@ -1,17 +1,18 @@
 <template>
-  <li class="list" @click="toggle">
-    <input type="checkbox" :checked="todo.is_done" />
-    <span class="task" :style="todo.is_done ? 'text-decoration: line-through' : ''">
-      {{ todo.title }}
-    </span>
-    <i class="uil" :class="icon"></i>
-    <button @click.stop="remove" style="margin-left: 10px; color: red;">✕</button>
+  <li class="todo-item" :class="{ done: todo.is_done }">
+    <label class="checkbox-wrapper">
+      <input type="checkbox" :checked="todo.is_done" @change="toggle" />
+      <span class="checkmark"></span>
+    </label>
+    <span class="todo-title">{{ todo.title }}</span>
+    <button class="delete-btn" @click.stop="remove" aria-label="Delete">
+      <i class="uil uil-trash-alt"></i>
+    </button>
   </li>
 </template>
 
 <script>
 import { useTodoStore } from '../stores/todo'
-
 export default {
   props: ['todo', 'icon'],
   setup(props) {
